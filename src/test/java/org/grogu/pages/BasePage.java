@@ -1,6 +1,7 @@
 package org.grogu.pages;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.config.DriverManagerType;
 import org.grogu.enums.BrowserName;
 import org.grogu.utility.DriverMangerHolder;
 import org.openqa.selenium.*;

@@ -8,7 +8,7 @@ Feature: Fill details in web form in practice site
       | "some sample text"   | "strong password" | "Lorem ipsum in text area"  |
     And I select "One" from dropdown select
     And I select "New York" from dropdown datalist
-    And I upload file "C:\Users\reddy.nodankumar\Downloads\Certificate.pdf"
+    And I upload file "C:\Users\nodan\Downloads\testscript.bat"
     And I select the default checkbox and default radio
     And I choose green color
     And I enter "03/06/2024" in the date picker
