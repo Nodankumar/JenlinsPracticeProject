@@ -1,5 +1,6 @@
 package org.grogu.utility;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -19,10 +20,10 @@ public class ExcelManager {
 
         List<Map<String, String>> loginData = new ArrayList<>();
 
-        /* File workBookFile = new File(filePath);
-         * if (!workBookFile.exists()) { throw new
-         * IOException("Excel file not found at: " + filePath); }
-         */
+         File workBookFile = new File(System.getProperty("user.dir")+"//src//test//resources//"+filePath);
+          if (!workBookFile.exists()) {
+              throw new IOException("Excel file not found at: " + filePath);
+          }
 
         InputStream fin = ClassLoader.getSystemResourceAsStream(filePath);
         if(fin==null) {

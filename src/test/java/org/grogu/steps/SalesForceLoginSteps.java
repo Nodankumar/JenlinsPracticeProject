@@ -36,10 +36,8 @@ public class SalesForceLoginSteps {
     public void iEnteredTheDataFromTheFile(String filePath) {
         try {
             salesForceLoginPage.enterCredentialsFromFile(filePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidFormatException e) {
-            throw new RuntimeException(e);
+        } catch (IOException | InvalidFormatException e) {
+            e.printStackTrace();
         }
     }
 
