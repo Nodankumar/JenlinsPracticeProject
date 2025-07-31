@@ -24,10 +24,17 @@ public class BasePage {
 
 
     public BasePage(BrowserName browserName){
-        driver.set(WebDriverManager.getInstance(browserName.toString()).create());
+        if(browserName.toString().equalsIgnoreCase("edge")){
+            System.out.println("Edge browser driver setup done successfully");
+            System.setProperty("webdriver.edge.driver", System.getProperty("usr.dir")+"//src//test//resources//drivers//msedgedriver.exe");
+            driver.set(WebDriverManager.edgedriver().create());
+        }else {
+            driver.set(WebDriverManager.getInstance(browserName.toString()).create());
+        }
         DriverMangerHolder.setDriver(driver.get());
         webDriverWait = new WebDriverWait(driver.get(), Duration.ofSeconds(timeoutSec));
         driver.get().manage().window().maximize();
+
     }
 
     public BasePage(MutableCapabilities mutableCapabilities, String remoteAddress){
