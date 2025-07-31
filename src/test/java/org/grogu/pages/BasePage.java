@@ -5,6 +5,8 @@ import io.github.bonigarcia.wdm.config.DriverManagerType;
 import org.grogu.enums.BrowserName;
 import org.grogu.utility.DriverMangerHolder;
 import org.openqa.selenium.*;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.Color;
@@ -26,8 +28,13 @@ public class BasePage {
     public BasePage(BrowserName browserName){
         if(browserName.toString().equalsIgnoreCase("edge")){
             System.out.println("Edge browser driver setup done successfully");
-            System.setProperty("webdriver.edge.driver", System.getProperty("usr.dir")+"//src//test//resources//drivers//msedgedriver.exe");
-            driver.set(WebDriverManager.edgedriver().create());
+            System.setProperty("webdriver.edge.driver", System.getProperty("user.dir")+"//src//test//resources//drivers//msedgedriver.exe");
+            EdgeOptions options = new EdgeOptions();
+            options.addArguments("--headless=new");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--remote-allow-origins=*");
+            driver.set(new EdgeDriver(options));
         }else {
             driver.set(WebDriverManager.getInstance(browserName.toString()).create());
         }

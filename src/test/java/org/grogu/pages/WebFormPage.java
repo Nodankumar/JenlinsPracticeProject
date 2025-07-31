@@ -1,6 +1,7 @@
 package org.grogu.pages;
 
 import org.grogu.enums.BrowserName;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -74,8 +75,11 @@ public class WebFormPage extends BasePage{
     }
 
     public void selectDefaultCheckBoxAndRadio(){
-        click(checkbox);
-        click(radioBox);
+        /*click(checkbox);
+        click(radioBox);*/
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("document.getElementById('my-check-2').click()");
+        js.executeScript("document.getElementById('my-radio-2').click()");
     }
 
     public void chooseColor(int redValue, int greenValue, int blueValue, int opacity){
