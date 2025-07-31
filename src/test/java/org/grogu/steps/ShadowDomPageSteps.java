@@ -7,6 +7,7 @@ import org.grogu.enums.BrowserName;
 import org.grogu.listeners.MyListener;
 import org.grogu.pages.ShadowDomPage;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 
 public class ShadowDomPageSteps {
@@ -36,6 +37,6 @@ public class ShadowDomPageSteps {
 
     @Then("I verify text is {string}")
     public void i_verify_text_is(String expectedText) {
-        assertNotEquals(shadowText, expectedText, "Failing Knowingly to test screenshot capture feature");
+        assertEquals(shadowText, expectedText, "Failing Knowingly to test screenshot capture feature");
     }
 }
