@@ -27,14 +27,14 @@ public class BasePage {
 
     public BasePage(BrowserName browserName){
         if(browserName.toString().equalsIgnoreCase("edge")){
-            System.out.println("Edge browser driver setup done successfully");
-            System.setProperty("webdriver.edge.driver", System.getProperty("user.dir")+"//src//test//resources//drivers//msedgedriver.exe");
+            WebDriverManager.edgedriver().arch64().setup();
             EdgeOptions options = new EdgeOptions();
             options.addArguments("--headless=new");
             options.addArguments("--disable-gpu");
             options.addArguments("--no-sandbox");
             options.addArguments("--remote-allow-origins=*");
             driver.set(new EdgeDriver(options));
+            System.out.println("Edge browser driver setup done successfully");
         }else {
             driver.set(WebDriverManager.getInstance(browserName.toString()).create());
         }
