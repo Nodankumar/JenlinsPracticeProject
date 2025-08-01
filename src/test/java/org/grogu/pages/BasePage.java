@@ -5,8 +5,10 @@ import io.github.bonigarcia.wdm.config.DriverManagerType;
 import org.grogu.enums.BrowserName;
 import org.grogu.utility.DriverMangerHolder;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.Color;
@@ -26,7 +28,22 @@ public class BasePage {
 
 
     public BasePage(BrowserName browserName){
-        driver.set(WebDriverManager.getInstance(browserName.toString()).create());
+        MutableCapabilities options = new MutableCapabilities();
+
+        switch (browserName.toString()) {
+            case "chrome" -> {
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless=new");
+                chromeOptions.addArguments("--no-sandbox");
+                chromeOptions.addArguments("--disable-dev-shm-usage");
+                options = chromeOptions;
+            }
+            case "firefox" -> {
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments("--headless");
+                options = firefoxOptions;
+            }}
+        driver.set(WebDriverManager.getInstance(browserName.toString()).capabilities(options).create());
         DriverMangerHolder.setDriver(driver.get());
         webDriverWait = new WebDriverWait(driver.get(), Duration.ofSeconds(timeoutSec));
         driver.get().manage().window().maximize();
