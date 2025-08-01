@@ -218,6 +218,8 @@
                     </includes>
                     <parallel>classesAndMethods</parallel>
                     <forkCount>2</forkCount>
+                    <!-- Enable rerun/failure reports etc. if needed -->
+                    <testFailureIgnore>false</testFailureIgnore>
                 </configuration>
             </plugin>
         </plugins>
