@@ -50,5 +50,5 @@ And place your install-plugins.groovy file there.
 
 OR
 
-You can just go to manage jenkins 
+You can just go to manage jenkins, and run this script in script console
 */
