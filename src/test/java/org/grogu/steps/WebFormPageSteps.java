@@ -16,7 +16,7 @@ public class WebFormPageSteps {
 
     WebFormPage webFormPage;
 
-    @ParameterType("chrome|edge")
+    @ParameterType("chrome|edge|firefox")
     public BrowserName browserName(String browserType){
         return BrowserName.valueOf(browserType);
     }

@@ -1,7 +1,7 @@
 Feature: Fill details in web form in practice site
 
   Scenario: Enter all the required details in web form
-    Given I use edge browser
+    Given I use firefox browser
     When I navigate to the web form "https://bonigarcia.dev/selenium-webdriver-java/web-form.html"
     And I enter the following data
       | TextInput            | Password          | TextArea                    |

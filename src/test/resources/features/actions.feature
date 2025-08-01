@@ -7,7 +7,7 @@ Feature: Testing in practice site
     Then I see "compass" text
 
   Scenario: Test dragAndDrop
-    Given I use edge for drag and drop site
+    Given I use firefox for drag and drop site
     When I visit "https://bonigarcia.dev/selenium-webdriver-java/drag-and-drop.html" drag and drop site
     And I drag my draggable panel to the target location
     Then I verify draggable panel and target location both are equal
