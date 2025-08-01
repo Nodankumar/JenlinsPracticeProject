@@ -27,7 +27,8 @@ public class BasePage {
 
     public BasePage(BrowserName browserName){
         if(browserName.toString().equalsIgnoreCase("edge")){
-            System.setProperty("webdriver.edge.binary", System.getenv("EDGE_BINARY_PATH"));
+            System.setProperty("webdriver.edge.driver", System.getProperty("user.dir")+"//src//test//resources//drivers//msedgedriver.exe");
+            //WebDriverManager.edgedriver().arch64().setup();
             EdgeOptions options = new EdgeOptions();
             options.addArguments("--headless=new");
             options.addArguments("--disable-gpu");
