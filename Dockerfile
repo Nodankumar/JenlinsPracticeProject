@@ -13,9 +13,11 @@ RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | \
     apt-get update && apt-get install -y google-chrome-stable && \
     rm -rf /var/lib/apt/lists/*
 
-# Install ChromeDriver (adjust version if needed)
-RUN CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d '.' -f1) && \
-    CHROMEDRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION") && \
+# Install ChromeDriver (adjust version automatically)
+RUN CHROME_VERSION=$(google-chrome-stable --version | grep -oP '\d+\.\d+\.\d+\.\d+' | head -1) && \
+    CHROME_MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d '.' -f1) && \
+    CHROMEDRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR_VERSION") && \
+    echo "Using Chrome version $CHROME_VERSION and Chromedriver version $CHROMEDRIVER_VERSION" && \
     wget -q "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip" -O /tmp/chromedriver.zip && \
     unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
     rm /tmp/chromedriver.zip && \
@@ -29,7 +31,7 @@ RUN wget -q "https://github.com/mozilla/geckodriver/releases/download/${GECKODRI
     chmod +x /usr/local/bin/geckodriver
 
 # Set working directory
-WORKDIR /app
+WORKDIR /seleniumjenkins
 
 # Copy entire Maven project
 COPY . .
@@ -38,4 +40,4 @@ COPY . .
 ENV DISPLAY=:99
 
 # Default command: start Xvfb in background, then run Maven tests
-CMD Xvfb :99 -screen 0 1920x1080x24 & mvn clean test
+CMD ["sh", "-c", "Xvfb :99 -screen 0 1920x1080x24 & mvn clean test"]
