@@ -1,18 +1,27 @@
-FROM maven:3.9.6-eclipse-temurin-21
+# Use OpenJDK base
+FROM openjdk:21-jdk-slim
 
-# Install Chrome & Firefox
+# Install dependencies + Maven
 RUN apt-get update && apt-get install -y \
-    wget curl gnupg unzip xvfb firefox-esr \
-    && curl -sSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /etc/apt/trusted.gpg.d/google.gpg && \
+    wget curl gnupg unzip xvfb firefox-esr maven \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Chrome
+RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | \
+    gpg --dearmor -o /etc/apt/trusted.gpg.d/google.gpg && \
     echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
     apt-get update && \
     apt-get install -y google-chrome-stable && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /seleniumjenkins
+# Set working directory
+WORKDIR /app
 
+# Copy the entire Maven project
 COPY . .
 
+# Run tests using Maven
 RUN mvn clean test
 
-CMD ["echo", "Tests completed in Docker"]
+# Default command
+CMD ["echo", "Tests completed inside Docker"]
