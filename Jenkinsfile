@@ -15,6 +15,9 @@ pipeline {
         stage("verify all tools availability"){
             steps{
                 auditTools()
+                /* auditTools message: "Passing parameter"
+                    if the function accepts parameter def call(Map config)
+                */
             }
         }
         stage('Checkout') {
