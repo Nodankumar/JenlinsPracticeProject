@@ -1,3 +1,8 @@
+/*  Get common lib functions from other repository
+    for example: at remote url i have file with auditTools.groovy(That has call() with few commands */
+library identifier: 'JenkinsSharedLibs@master',
+        retriever: modernSCM([$class:'GITSCMSource', remote: 'https://github.com/Nodankumar/JenkinsSharedLibs.git'])
+
 pipeline {
     agent any
 
@@ -6,6 +11,12 @@ pipeline {
     }
 
     stages {
+
+        stage("verify all tools availability"){
+            steps{
+                auditTools()
+            }
+        }
         stage('Checkout') {
             steps {
                 git 'https://github.com/Nodankumar/JenlinsPracticeProject.git'

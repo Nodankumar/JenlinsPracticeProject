@@ -216,6 +216,9 @@
                     <includes>
                         <include>**/TestRunner*.java</include>
                     </includes>
+                    <!--<excludes>
+                        <exclude>**/TestRunnerJ5.java</exclude>
+                    </excludes>-->
                     <parallel>classesAndMethods</parallel>
                     <forkCount>2</forkCount>
                     <!-- Enable rerun/failure reports etc. if needed -->
